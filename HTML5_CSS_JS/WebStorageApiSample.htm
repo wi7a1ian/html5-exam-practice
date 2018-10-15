@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta harset="utf-8">
+	<title>HTML5</title>
+	<script>
+        // Old cookies
+        document.cookie = "username=John Doe; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/";
+        document.cookie = "username2=Tomsz Lis; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/";
+        console.log(document.cookie);
+
+        var usernames = document.cookie.split(";");
+        for (var i in usernames) {
+            var keyvalpair = usernames[i].split("=");
+            console.log("Name: " + keyvalpair[0].trim() + ", Value: " + keyvalpair[1].trim());
+        }
+
+
+	    // The sessionStorage object is equal to the localStorage object, except that it stores the data for only one session. The data is deleted when the user closes the specific browser tab.
+        function clickCounter() {
+	        if(typeof(Storage) !== "undefined") {
+		        if (sessionStorage.clickcount) {
+		            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+		        } else {
+		            sessionStorage.clickcount = 1;
+		        }
+		        document.getElementById("clicks").innerHTML = "You have clicked the button " + sessionStorage.clickcount + " time(s) in this session.";
+	        } else {
+		        document.getElementById("clicks").innerHTML = "Sorry, your browser does not support web storage...";
+	        }
+        }
+
+        // Cool helper for de/serializing objects
+        Storage.prototype.setObject = function(key, value){
+	        this.setItem(key, JSON.stringify(value));
+        }
+        Storage.prototype.getObject = function (key) {
+            return this.getItem(key) && JSON.parse(this.getItem(key));
+        }
+
+        // some class
+        //var Fruit = function(name, color){
+        function Fruit() {
+            this.typeId = 0;
+            this.name = '';
+            this.color = '';
+        }
+    </script>
+</head>
+<body>
+    <div id="result">
+	    yo
+    </div>
+    <button onclick="clickCounter()" type="button">Click me!</button>
+    <div id="clicks"></div>
+    <div id="fruit"></div>
+    <div id="keyups"></div>
+    <script>
+        // The localStorage object stores the data with no expiration date. The data will not be deleted when the browser is closed, and will be available the next day, week, or year.
+
+        // 1. Basic usage
+        localStorage && localStorage.setItem("lastname", "Smith");
+	    document.getElementById("result").innerHTML = localStorage.getItem("lastname") || "Does not exist!"
+	    localStorage && localStorage.removeItem("lastname");
+
+        // 2. More dynamic usage
+	    localStorage.WeAreOk = true;
+	    if(localStorage.WeAreOk){
+		    document.getElementById("result").innerHTML += " is OK!"
+	    }
+
+        // 3. Serialization
+	    var orange = new Fruit();
+	    orange.color = 'orange';
+	    orange.name = 'Orange';
+	    orange.typeId = 7;
+
+	    var apple = new Fruit();
+	    apple.color = 'red';
+	    apple.name = 'Apple';
+	    apple.typeId = 6;
+
+	    var fruits = new Array(orange, apple);
+
+	    sessionStorage.setObject('fruits', fruits);
+	    fruits = sessionStorage.getObject('fruits');
+
+	    document.getElementById("fruit").innerHTML = 'Should be an apple: ' +fruits[1].name;
+        
+        // 4. Listening to the event (even between pages)
+	    window.onload = function () {
+	        window.addEventListener('storage', function (event) {
+	            alert(event.newValue);
+	            //if (event.key == 'storage-keyups') {
+	            document.getElementById("keyups").innerHTML = event.newValue;
+	            //}
+	        }, false);
+	        window.addEventListener('keyup', function (event) {
+	            localStorage.setItem('storage-keyups', event.charCode);
+	        });
+	    };
+    </script>
+</body>

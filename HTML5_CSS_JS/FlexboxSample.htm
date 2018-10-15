@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta harset="utf-8">
+	<title>HTML5</title>
+	<style>
+	/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+	.container {
+  	    display: flex; /* or inline-flex */
+		height: 300px; /* Or whatever */
+		flex-direction: row; /* row | row-reverse | column | column-reverse */
+		flex-wrap: nowrap; /* nowrap | wrap | wrap-reverse*/
+		flex-flow: row nowrap;
+		justify-content: space-between; /* flex-start | flex-end | center | space-between | space-around */
+		align-items: center; /* flex-start | flex-end | center | baseline | stretch*/
+		align-content: stretch; /*flex-start | flex-end | center | space-between | space-around | stretch*/
+	}
+	.container .item {
+		width: 100px;  /* Or whatever */
+  	    height: 100px; /* Or whatever */
+  	    margin: auto;  /* Magic! */
+		order: 1;
+		flex-grow: 0; /* default 0 */
+		flex-shrink: 1; /* default 1 */
+		flex-basis: auto auto; /* default auto */
+		/* flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] */
+		align-self: auto; /* auto | flex-start | flex-end | center | baseline | stretch*/
+	}
+
+	.container #abc1{
+  	background-color: #f31212;
+	}
+
+	.container #abc2{
+  	background-color: blue;
+	}
+
+	/* Medium screens */
+	@media all and (min-width: 600px) {
+	  /* We tell both sidebars to share a row */
+	  .aside { flex: 1 auto; }
+	}
+
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="item" id="abc1">
+		1
+	</div>
+	<div class="item">
+		2
+	</div>
+	<div class="item">
+		3
+	</div>
+	<div class="item" id="abc2">
+		4
+	</div>
+
+</div>
+
+</body>

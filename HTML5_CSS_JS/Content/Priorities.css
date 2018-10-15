@@ -1,0 +1,34 @@
+﻿/*
+	The style that has the highest CSS specificity is applied. The specificity of different elements is defined as follows:
+		!important attribute = highest
+		ID attribute = 100
+		Class attribute = 10
+		Element = 1
+
+	The priority order of the elements is as follows:
+		style attribute in a HTML element
+		<style> tag in the <head> element
+		@import attribute in the CSS area
+		<link> tag in the <head> element
+	( The style attribute in the HTML element has the highest priority after the !important attribute. )
+
+	Browser order is from lowes to highest: 
+		agent normal 
+		user normal 
+		author normal 
+		author important
+		user important
+*/
+
+p#target {color: black} /* Specificity: 101 */
+p#target {color: red} /* Specificity: 101 */
+p.target {color: blue} /* Specificity: 11 */
+p {color: tomato} /* Specificity: 1 */
+/* Red color is applied */
+
+
+a#target {color: black !important}
+a#target {color: red}
+a.target {color: blue}
+a {color: tomato}
+/* Black color is applied */

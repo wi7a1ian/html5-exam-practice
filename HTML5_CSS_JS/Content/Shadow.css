@@ -1,0 +1,4 @@
+﻿p.target {
+    /*text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;*/
+    text-shadow: 2px 2px 10px #ff0000;
+}

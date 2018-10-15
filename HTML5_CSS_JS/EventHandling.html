@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <article id="art1" onclick="SomeEvent1()">
+        <header>
+            <h3>
+                Article 1 header
+            </h3>
+        </header>
+        <p>
+            New article 1 body
+        </p>
+        <footer>
+            <em>Written by:</em> <strong>Wit</strong> at <time>18:40</time>
+        </footer>
+    </article>
+
+    <script>
+        var art = document.getElementById("art1");
+        var head = art.getElementsByTagName("header")[0];
+
+        function SomeEvent1(){alert("SomeEvent1");}
+        function SomeEvent2(){alert("SomeEvent2");}
+        function SomeEvent3(){alert("SomeEvent3");}
+        function SomeEvent4(e) { alert("SomeEvent4 + cancel bubble"); e.cancelBubble = true; }
+
+        art.onclick = SomeEvent2; // Will overwrite SomeEvent1()
+        head.addEventListener("click", SomeEvent3);
+        head.addEventListener("click", SomeEvent4, false); // use bubbling (default), not capture
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿
+/*The hyphens CSS property tells the browser how to hyphenate words when line-wrapping. You can prevent hyphenation entirely, control when the browser should hyphenate, or let the browser control when to hyphenate.*/
+p.auto {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+p.linebreak {
+    line-break: auto; /*break text using  the default line break rule*/
+    line-break: loose; /*break text using the line break rule that the line is shorter like a newspaper.*/
+    line-break: normal; /*break text using the common line break rule*/
+    line-break: strict; /*break text using the stringent line break rule.*/
+}
+
+p.wordbreak {
+    word-break: normal; 
+    word-break: break-all; /*Word breaks may be inserted between any character for non-CJK (Chinese/Japanese/Korean) text.*/
+    word-break: keep-all; /*Don't allow word breaks for CJK text.  Non-CJK text behavior is the same as for normal.*/
+}
+
+/*The column-width property specifies a suggested, optimal width for the columns.*/
+p.newspaper {
+    -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+    -moz-column-width: 100px; /* Firefox */
+    column-width: 100px; 
+}

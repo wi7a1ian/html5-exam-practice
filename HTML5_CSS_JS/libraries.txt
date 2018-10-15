@@ -1,0 +1,8 @@
+Win JS - UI controls
+Underscore - filters/mappers like in Linq
+Backbone - framework for creating pages, based on MVP ( model-view-presenter )
+Knockout - simpler framework for creating pages
+Jquery - lib for manipulating DOM objects, animations and UI
+Angula - extended HTML
+Bootstrap - web template from Flicker folks
+D3 - awesome data visualizations (interactive!)

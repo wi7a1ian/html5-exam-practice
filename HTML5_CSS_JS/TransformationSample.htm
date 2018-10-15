@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html5 lang="en">
+<head>
+	<meta harset="utf-8">
+	<title>HTML5</title>
+	<style>
+	.container *{
+		transition: all 1s;
+	}
+	.container .item:hover {
+		background: red;
+	}
+
+	.container .item:hover {
+		transform: rotate(-15deg) skewX(-90deg) scale(0.5,2);
+		transition-delay: 0.2;
+		opacity: 0.2;
+	}
+
+	.container #abc1:hover {
+		background: blue;
+		transform: none;
+		opacity: inherit;
+		transform: translate(10px, 100px);
+		text-transform: uppercase;
+	}
+	.vanish {
+		opacity: 0.01;
+		transform: scale(0.01);
+	}
+
+	@keyframes get-angry {
+		0% {box-shadow: 0 0 1px 1px #000000; text-shadow: 0 0 #ffffff; color: black; border: 3px black; border-radius: 50%;}
+		50% {box-shadow: color: yellow;}
+		100% {box-shadow: 0 0 10px 10px #555500; text-shadow: 1 1 #ffffff; color: pink; border: 3px black; border-radius: 100%;}
+	}
+	.container #abc2:hover {
+		transform: none;
+		opacity: inherit;
+		animation: get-angry 3s forwards;
+	}
+	</style>
+
+	<!-- TODO: $('#abc1').classList.add("vanish"); -->
+
+</head>
+<body>
+
+<div class="container">
+	<div class="item" id="abc1">
+		1 Hello World
+	</div>
+	<div class="item">
+		2 Hello World
+	</div>
+	<div class="item">
+		3 Hello World
+	</div>
+	<div class="item" id="abc2">
+		4 Hello World
+	</div>
+
+</div>
+
+    <script>
+        document.getElementById("container").style.transform = "rotate(7deg)";
+    </script>
+</body>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+</head>
+<body>
+    <p>Click the button to get your coordinates.</p>
+    <button onclick="getGeolocation()">Reload</button>
+    <p id="demo"></p>
+    <div id="map"></div>
+    <script>
+        var x = document.getElementById("demo");
+
+        function getGeolocation() {
+            if (navigator.geolocation) {
+                var positionOptions = { enableHighAccuracy: true, timeout: 10 * 1000 };
+                navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationFail, positionOptions);
+                // watchPosition() will return the current position of the user and continues to return updated position as the user moves (like the GPS in a car).
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function geolocationSuccess(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+            //loadGoogleMap(position.coords.latitude, position.coords.longitude);
+        }
+        function geolocationFail(error) {
+            x.innerHTML = error.message;
+        }
+        /*function loadGoogleMap(latitude, longitude) {
+            var userLatLng = new google.maps.LatLng(latitude, longitude);
+            var userMap = new google.maps.Map(document.getElementById('map'));
+            new google.maps.Marker({ map: userMap, position: userLatLng });
+        }*/
+
+        window.onload = getGeolocation;
+    </script>
+</body>
+</html>

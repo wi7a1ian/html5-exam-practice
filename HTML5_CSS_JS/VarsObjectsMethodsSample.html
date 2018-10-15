@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script>
+        // Case 0
+        var u;
+        var n = null;
+        console.log("Unedefined variable: " + u + " typeof: " + typeof (undefined)); // = undefined, undefined
+        console.log("Null variable: " + n + " typeof: " + typeof (null)); // = null, object
+
+        if (!u || !n) {
+            console.log("Check id undefined and null");
+        }
+
+        // Case 1
+        var global = 5;
+
+        function doSomething() {
+            var local = 20;
+        }
+
+
+        // Case 2
+        var arr = new Array();
+        var date = new Date();
+        var str = new String();
+
+        var obj = new Object();
+        obj.something = 'something';
+        obj.someFunc = function (id) { return id; }
+
+        isNaN(123) //false
+        isNaN(-1.23) //false
+        isNaN(5 - 2) //false
+        isNaN(0) //false
+        isNaN('123') //false
+        isNaN('Hello') //true
+        isNaN('2005/12/12') //true
+        isNaN('') //false
+        isNaN(true) //false
+        isNaN(undefined) //true
+        isNaN('NaN') //true
+        isNaN(NaN) //true
+        isNaN(0 / 0) //true
+    
+
+        // Case 3
+        function letsBegin() {
+            var kokojumbo1 = new Function("document.bgColor='black'");
+            var kokojumbo2 = function () {
+                document.bgColor = 'black';
+            };
+            console.log(kokojumbo1, kokojumbo2);
+
+            var kuku = new Object();
+            var koko = {};
+            console.log(kuku, koko);
+
+            var beee = new String("beee");
+            var muuu = "muuu";
+            console.log(beee, muuu);
+
+            var ihahaa = new Number(3);
+            var ihoiho = 3;
+            console.log(ihahaa, ihoiho);
+
+            var hauuuu = new Boolean(false);
+            var miauuu = false;
+            console.log(hauuuu, miauuu);
+
+            if (hauuuu) {
+                console.log("WRONG");
+            }
+        }
+
+        // Case 4
+        function equality() {
+            if (1 == true) { console.log("1"); }
+            if (1 == "1") { console.log("2"); }
+            if (0 == "") { console.log("3"); }
+
+            if (1 === true) { console.log("4"); }
+            if (1 === "1") { console.log("5"); }
+            if (0 === "") { console.log("6"); }
+        }
+
+        // Case 5
+        function printMyName(myName) {
+            console.log("My name is " + myName);
+        }
+        function printMyName2(myName) {
+            if (typeof myName !== "string") {
+                throw "Wrong!";
+            }
+            console.log("My name is " + myName);
+        }
+
+        letsBegin();
+        equality();
+        printMyName(10);
+        try {
+            printMyName2(10);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            console.log("finally");
+        }
+
+        // Case 6 - no overloading
+        function log(message) {
+            console.log(message);
+        }
+
+        function log(message1, message2) {
+            console.log(message1 + " " + message2);
+        }
+
+        log("No overloading");
+        log("Just", "overwriting");
+
+        // Case 7 - accept only functions as params
+        function executeFunction(runThis) {
+            if (runThis !== undefined && typeof (runThis) === 'function') {
+                runThis();
+            } else {
+                console.log("no function passed");
+            }
+        }
+
+        executeFunction();
+        executeFunction(function () { console.log("big beer") });
+        executeFunction("function");
+        executeFunction(12345);
+
+        // Case 8 - typeof vs instanceof
+
+        // Use instanceof for custom types:
+        var ClassFirst = function () { };
+        var ClassSecond = function () { };
+        var instance = new ClassFirst();
+        typeof instance; // object
+        typeof instance == 'ClassFirst'; //false
+        instance instanceof Object; //true
+        instance instanceof ClassFirst; //true
+        instance instanceof ClassSecond; //false 
+
+        // Use typeof for simple built in types:
+        'example string' instanceof String; // false
+        typeof 'example string' == 'string'; //true
+
+        'example string' instanceof Object; //false
+        typeof 'example string' == 'object'; //false
+
+        true instanceof Boolean; // false
+        typeof true == 'boolean'; //true
+
+        99.99 instanceof Number; // false
+        typeof 99.99 == 'number'; //true
+
+        //function() {} instanceof Function; //true
+        typeof function () { } == 'function'; //true
+
+        // Use instanceof for complex built in types:
+        /regularexpression/ instanceof RegExp; // true
+        typeof /regularexpression/; //object
+
+        [] instanceof Array; // true
+        typeof []; //object
+
+        //{} instanceof Object; // true
+        typeof {}; //object
+        
+        //And the last one is a little bit tricky:
+        typeof null; //object
+
+        //---------------------------------------------------------------------------
+        // CLASSES:
+        //---------------------------------------------------------------------------
+
+        //var Fruit = function(name, color){
+        function Fruit(name, color) {
+            if (name == null && name == "") {
+                throw new Error("Name cannot be empty");
+            }
+
+            this.type = "Veggie";
+            this.name = name;
+            this.color = color;
+
+            this.ToString = function () {
+                console.log("Hi, I am an " + this.name);
+            }
+        }
+        // add another method after object was declared
+        Fruit.prototype.Print = function () {
+            this.ToString();
+        }
+        // remove a field
+        delete Fruit.prototype.type;
+
+        var orange = new Fruit("orange", "orange");
+        orange.Print();
+    
+        // inheritance #1
+        function Orange(origin) {
+            this.origin = origin;
+        }
+        // set inheritance and call base constructor right away
+        Orange.prototype = new Fruit('orange');
+        // override method
+        Orange.prototype.ToString = function () {
+            console.log("Hi, I am an " + this.name + ' from ' + this.origin);
+        }
+
+        var orange2 = new Orange("Italy");
+        orange2.Print();
+
+        // inheritance #2
+        function Apple(origin, color) {
+            // chain constructors
+            Fruit.call(this, "apple", color);
+
+            this.origin = origin;
+
+            // override method
+            this.ToString = function () {
+                console.log("Hi, I am an " + this.name + ' from ' + this.origin + ' and my color is ' + this.color);
+            }
+        }
+        // set inheritance
+        Apple.prototype = new Fruit();
+        // overwrite constructor so that the child one is used first (later we do call base constructor)
+        Apple.prototype.constructor = Apple;
+
+        var apple = new Apple("Italy", "red");
+        apple.Print();
+
+        // private
+        function Potato(name){
+            var _name = name;
+            return {
+                getName: function(){ return _name; },
+                setName: function(val){ _name = val; }
+            };
+        }
+        var potato = new Potato("SomeName");
+        console.log(potato._name); // undefined
+        console.log(potato.getName());
+        potato.setName("SomeOtherName");
+        console.log(potato.getName());
+
+        //---------------------------------------------------------------------------
+        // Events:
+        //---------------------------------------------------------------------------
+
+        //capture phase  | |  / \ bubbling up
+        //-----------------| |--| |-----------------
+        //| element1       | |  | |                |
+        //|   -------------| |--| |-----------     |
+        //|   |element2    \ /  | |          |     |
+        //|   --------------------------------     |
+        //|        W3C event model                 |
+        //------------------------------------------
+
+        var div = document.createElement("div");
+        //1
+        div.innerHTML = "<article id='art' onclick='somefunc()'> Art </article>";
+        document.body.appendChild(div);
+        //2
+        var art = document.getElementById("art");
+        art.onclick = function (e) { }
+        //3
+        art.addEventListener('click', function (e) { });
+        art.addEventListener('click', function (e) { }, true); // use capture phase instead of bubbling up
+        //4
+        if (art.addEventListener) {     // For all major browsers, except IE 8 and earlier
+            art.addEventListener("click", function (e) { });
+        } else if (art.attachEvent) {   // For IE 8 and earlier versions
+            art.attachEvent("onclick", function (e) { });
+        }
+
+
+
+        //---------------------------------------------------------------------------
+        // Null vs undefined:
+        //---------------------------------------------------------------------------
+
+        var n = null;
+        var u; // undefined
+
+        console.log(n == u); // true
+        console.log(n === u); // false
+        console.log(n != null); // false
+        console.log(u != undefined); // false
+        console.log(!n); // true
+        console.log(!u); // true
+
+
+    </script>
+
+    <article id="somearticle" onclick="somefunc()"></article>
+</body>
+</html>

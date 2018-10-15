@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script>
+        function confirmEmail(input1, input2) {
+            if (input1.value != input2.value || input1.value == '' || input2.value == '') {
+                input1.setCustomValidity('Email addresses must match.')
+            } else {
+                input1.setCustomValidity('')
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form role="form" action="#" method="GET">
+            <ul>
+                <li>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Type your name here" autofocus maxlength="128">
+                </li>
+                <li>
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" name="password" required autocomplete="off" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+                </li>
+                <li>
+                    <label for="website">Website:</label>
+                    <input type="text" id="website" name="website" title="http://www.google.com" pattern="https?://.+">
+                </li>
+                <li>
+                    <label for="department">Departament:</label>
+                    <input id="department" list="departmentlist">
+                    <datalist id="departmentlist" required>
+                        <option value="Finance" />
+                        <option value="Human Resources" />
+                    </datalist>
+                </li>
+                <li>
+                    <label for="birthdate">Brith Date:</label>
+                    <input id="birthdate" type="date" name="birthdate" required min="1980-01-01" max="2000-01-01">
+                </li>
+                <li>
+                    <label for="experienceyears">Experience (years): </label>
+                    <input id="experienceyears" type="number" name="experienceyears" min="0" max="50" step="0.5">
+                </li>F
+                <li>
+                    <label for="eyecolor">Eye color: </label>
+                    <input id="eyecolor" type="color" name="eyecolor">
+                </li>
+                <li>
+                    <label for="email">Email: </label>
+                    <input id="email" type="email" name="email">
+                </li>
+                <li>
+                    <label for="email">Confirm Email: </label>
+                    <input id="confirmemail" type="email" name="confirmemail" oninput="confirmEmail(this, document.getElementById('email'));">
+                </li>
+                <li>
+                    <label for="avatar">Avatar: </label>
+                    <input id="avatar" type="file" name="avatar" style="display: inline-block">
+                </li>
+                <li>
+                    <label for="gender">Gender: </label>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="female">Female
+                </li>
+            </ul>
+            <button type="reset" disabled>Reset</button>
+            <button type="submit" formnovalidate>Save</button>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

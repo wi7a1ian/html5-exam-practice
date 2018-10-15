@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html manifest="Manifest/Sample.appcache">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+</head>
+<body>
+    <article id="appCacheInfo"></article>
+    <script>
+        var appCacheInfo = document.getElementById('appCacheInfo');
+        var infoNode = document.createTextNode(window.applicationCache.status == window.applicationCache.UNCACHED);
+        appCacheInfo.appendChild(infoNode);
+    </script>
+</body>
+</html>

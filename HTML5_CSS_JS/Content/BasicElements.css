@@ -1,0 +1,32 @@
+﻿header, nav, article, aside, footer, hgroup, section {
+  display:block;
+}
+
+body {
+  width: 960px;
+  margin: 0 auto;
+  font-family: monospace !important; /* An !important declaration provides a way for a stylesheet author to give a CSS value more weight than it naturally has. */
+  font-size: 14px;
+  font-weight: normal;
+  text-align: justify;
+}
+
+header {
+  position: relative;
+}
+
+hgroup{
+  margin: 0 0 0 40px;
+}
+
+hgroup h1 {
+  font: 52px/54px HighlandGothicLightFLFRegular;
+  color: rgb(168, 222, 35);
+  font-weight: bold;
+}
+
+
+aside:hover{
+    transform: translateX(30px);
+    transition: all ease-out 1s;
+}

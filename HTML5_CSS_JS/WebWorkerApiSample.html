@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="resultMsg"></div>
+    <script>
+        var resultMsg = document.getElementById("resultMsg");
+
+        function doWork() {
+            var request = { SecretMessage: "dupa" };
+            var worker = new Worker("./WebWorkers/DemoWorker.js");
+
+            console.log("Sendng request: " + JSON.stringify(request));
+            worker.postMessage(request);
+
+            worker.onmessage = function (e) {
+                console.log("Obtained result: " + e.data);
+                resultMsg.innerHTML += e.data + "</br>";
+
+                worker.terminate();
+            }
+        }
+
+        document.addEventListener("click", doWork);
+    </script>
+</body>
+</html>

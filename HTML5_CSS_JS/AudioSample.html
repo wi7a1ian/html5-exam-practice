@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <style>
+        #customAudioSection img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    <script>
+        function playAudio() {
+            var audioPlayer = $('#customAudio');
+            var audioPlayerDom = audioPlayer.get(0);
+
+            if (audioPlayer.prop('paused')) {
+                // jQuery
+                audioPlayerDom.play();
+                document.getElementById('soundImg').src = 'https://image.freepik.com/free-icon/pause-button-outline_318-40569.png';
+            } else { // audioPlayerDom.paused
+                // DOM
+                audioPlayer.trigger('pause');
+                $('#soundImg').prop('src', 'https://image.freepik.com/free-icon/play-button_318-42541.jpg');
+            }
+        }
+    </script>
+</head>
+<body>
+    <section>
+        <audio src="http://www.kozco.com/tech/piano2-CoolEdit.mp3" controls loop autoplay>
+            <source src="http://www.kozco.com/tech/piano1-CoolEdit.mp3" type="mimetype" />
+            <source src="http://www.kozco.com/tech/piano2-CoolEdit.mp3" type="mimetype" />
+            <source src="http://www.kozco.com/tech/piano3-CoolEdit.mp3" type="mimetype" />
+            Audio unsupported
+        </audio>
+    </section>
+    <section id="customAudioSection">
+        <audio id="customAudio" src="http://www.kozco.com/tech/piano2-CoolEdit.mp3"></audio>
+        <button id="sound" onclick="playAudio()"><img id="soundImg" src="https://image.freepik.com/free-icon/play-button_318-42541.jpg" /></button>
+        <button id="volumeUp" onclick="$('#customAudio')[0].volume += 0.1"><img src="http://www.johngilltech.com/reports/images/volume_arrowtail_up.JPG" /></button>
+        <button id="volumeDown"  onclick="document.getElementById('customAudio').volume -= 0.1"><img src="http://www.johngilltech.com/reports/images/volume_arrowtail_down.JPG" /></button>
+    </section>
+</body>
+</html>

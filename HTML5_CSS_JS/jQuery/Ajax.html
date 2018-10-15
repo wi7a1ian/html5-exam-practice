@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+      
+        var menuId = $("ul.nav").first().attr("id");
+        var request = $.ajax({
+            url: "script.php",
+            method: "POST",
+            data: { id: menuId },
+            dataType: "html"
+        });
+
+        request.done(function (msg) {
+            $("#log").html(msg);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+
+        // Load and execute a JavaScript file.
+        $.ajax({
+            method: "GET",
+            url: "test.js",
+            dataType: "script"
+        });
+        
+        // The contentType is used to determine how the payload has to be sent to the server as request parameters or as request body.
+        // The accepts option let you change the Accept header in the request
+        // The dataType option let you pre-process the response
+
+    </script>
+
+</body>
+
+</html>
